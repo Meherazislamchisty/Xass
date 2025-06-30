@@ -17,7 +17,7 @@
     "body-parser": "^1.20.3",
     "canvas": "^2.11.2",
     "chalk": "^4.1.2",
-    "chatbox-fca-remake": "^4.3.5",
+    "chatbox-fca-remake": "github:joshuaAposto/chatbox-fca-remake",
     "cheerio": "^1.0.0",
     "express": "^4.21.0",
     "fs-extra": "^11.2.0",
