@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>【 XASS ERROR 】502</title>
+    <style>
+      @font-face {
+        font-family: "Roobert";
+        font-weight: 400;
+      }
+
+      :root {
+        --text-strong: #0d0d0d;
+        --text-primary: #272727;
+        --text-secondary: #6b6b6b;
+        --page-primary: #ffffff;
+        --accent: #ff0033;
+      }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --text-strong: #ffffff;
+        --text-primary: #f0f0f0;
+        --text-secondary: #c7c7c7;
+        --page-primary: #0d0d0d;
+        --accent: #ff3355;
+      }
+
+      body {
+        font-family: "Roobert", sans-serif;
+        margin: 0;
+        padding: 0 1rem;
+        background: var(--page-primary);
+        color: var(--text-strong);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 100vh;
+      }
+
+      .logo {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1rem;
+        border-radius: 50%;
+        background: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 0 20px rgba(255, 0, 51, 0.4);
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin: 0.5rem 0;
+        color: var(--accent);
+      }
+
+      .subheading {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+      }
+
+      .request-id {
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+
+      footer {
+        margin-top: auto;
+        padding: 1rem 0;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+    </style>
+    <script>
+      (function () {
+        try {
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (prefersDark) {
+            document.documentElement.setAttribute("data-theme", "dark");
+          }
+        } catch (e) {}
+      })();
+
+      function generateRequestId() {
+        const chars = "xass --xxajgsgjbcfhjutfdvbfdgg0123456789";
+        let id = "";
+        for (let i = 0; i < 16; i++) {
+          id += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return id.toUpperCase();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const requestId = generateRequestId();
+        document.getElementById("request-id").textContent = "Request ID: " + requestId + "-XASS";
+      });
+    </script>
+  </head>
+  <body>
+    <div class="logo">X</div>
+    <h1>【 XASS ERROR 】502</h1>
+    <div class="subheading">Bad Gateway - Server temporarily unavailable</div>
+    <div class="request-id" id="request-id">Request ID: </div>
+    <footer>Powered by XASS Bot System</footer>
+  </body>
+</html>

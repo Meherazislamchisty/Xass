@@ -1,0 +1,20 @@
+{
+  "Prefix": "*",
+  "Admin UID": "100088690249020",
+  "Version": "2.4.0",
+  "Credit": "BaYjid",
+  "GitHub": "https://github.com/BAYJID-00/XASS-BOY-V2",
+  "Bot Name": "𝐗𝐀𝐒𝐒 𝐁𝐎𝐓__/:;)🤍",
+  "Created On": "2025-06-30",
+  "Command Folder": "script/cmds",
+  "Auto React": true,
+  "Unsend React": true,
+  "Admin Only Mode": false,
+  "Developer Mode": true,
+  "Language": "en",
+  "Default Thread": "bot-thread",
+  "Log Folder": "logs/",
+  "Auto Restart Interval": "24h",
+  " Support Group": "https://facebook.com/groups/xassbot",
+  "📣 Updates Channel": "https://t.me/xassbots"
+}
