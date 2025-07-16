@@ -24,7 +24,7 @@ function generateStatusMessage() {
   const osPlatform = os.platform();
   const cpuArchitecture = os.arch();
 
-  return `𝐗𝐀𝐒𝐒 𝐁𝐎𝐓 ${hours} hour(s), ${minutes} minute(s), and ${seconds} second(s).\n\n` +
+  return `🎀𝔹𝕆𝕋ᶜᵁᵀ 𝐁𝐎𝐓__/:;)🤍 ${hours} hour(s), ${minutes} minute(s), and ${seconds} second(s).\n\n` +
     `❖ CPU Usage: ${cpuUsage}%\n` +
     `❖ RAM Usage: ${ramUsage} MB\n` +
     `❖ Cores: ${cores}\n` +
