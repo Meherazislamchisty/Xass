@@ -1,9 +1,9 @@
-# XASS
+# 🎀BOTcut
 
 <div align="center">
-  <img src="https://i.imgur.com/4PgWWhj.jpeg" alt="Profile Image" width="120" height="120" style="border-radius: 50%;">
-  <p><strong>XASS</strong></p>
-  <h2><strong>🤖 XASS BOT</strong></h2>
+  <img src="https://files.catbox.moe/7tfxcz.jpg" alt="Profile Image" width="120" height="120" style="border-radius: 50%;">
+  <p><strong>🎀BOTcut</strong></p>
+  <h2><strong>🤖 🎀BOTcut BOT</strong></h2>
   <p>Welcome to <strong>XASS BOT</strong> – your ultimate AI-powered companion for managing Facebook group chats effortlessly and smartly!</p>
 </div>
 
