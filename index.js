@@ -4,11 +4,12 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const login = require("@xaviabot/fca-unofficial");
 const fs = require("fs");
-const autoReact = require("./handle/autoReact");
-const unsendReact = require("./handle/unsendReact");
 const chalk = require("chalk");
 const axios = require("axios");
 const mongoose = require("mongoose");
+
+const autoReact = require("./handle/autoReact");
+const unsendReact = require("./handle/unsendReact");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,14 +19,12 @@ const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 .then(() => console.log("✅ MongoDB Connected!"))
 .catch((err) => console.error("❌ MongoDB Error:", err));
-
 
 global.XassBoT = {
   commands: new Map(),
@@ -43,15 +42,12 @@ const MAX_RETRIES = 5;
 const RETRY_INTERVAL = 5000;
 
 const userAgents = [
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64)...",
-  
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36"
 ];
 const getRandomUserAgent = () => userAgents[Math.floor(Math.random() * userAgents.length)];
 
-
 const loadModules = (folderPath, type) => {
   const files = fs.readdirSync(folderPath).filter(file => file.endsWith(".js"));
-
   console.log(chalk.bold.redBright(`──LOADING ${type.toUpperCase()}──●`));
   files.forEach(file => {
     const module = require(path.join(folderPath, file));
@@ -214,7 +210,8 @@ const handleFacebookLink = async (api, event) => {
 
 const init = async () => {
   await loadModules(path.join(__dirname, "script/cmds/commands"), "commands");
-  await loadModules(path.join(__dirname, "script/cmds/events"), "events");
+  await loadModules(path.join(__dirname, "script/events"), "events");
+
   await AutoLogin();
 
   console.log(chalk.bold.blueBright("──XASS BOT──"));
