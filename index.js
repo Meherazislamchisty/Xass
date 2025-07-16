@@ -18,12 +18,14 @@ const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
+
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 .then(() => console.log("✅ MongoDB Connected!"))
 .catch((err) => console.error("❌ MongoDB Error:", err));
+
 
 global.XassBoT = {
   commands: new Map(),
@@ -42,12 +44,12 @@ const RETRY_INTERVAL = 5000;
 
 const userAgents = [
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64)...",
-  // অন্যান্য ইউজার এজেন্ট চাইলে এখানে যোগ করো
+  
 ];
 const getRandomUserAgent = () => userAgents[Math.floor(Math.random() * userAgents.length)];
 
-const loadModules = (type) => {
-  const folderPath = path.join(__dirname, type);
+
+const loadModules = (folderPath, type) => {
   const files = fs.readdirSync(folderPath).filter(file => file.endsWith(".js"));
 
   console.log(chalk.bold.redBright(`──LOADING ${type.toUpperCase()}──●`));
@@ -211,8 +213,8 @@ const handleFacebookLink = async (api, event) => {
 };
 
 const init = async () => {
-  await loadModules("commands");
-  await loadModules("events");
+  await loadModules(path.join(__dirname, "script/cmds/commands"), "commands");
+  await loadModules(path.join(__dirname, "script/cmds/events"), "events");
   await AutoLogin();
 
   console.log(chalk.bold.blueBright("──XASS BOT──"));
