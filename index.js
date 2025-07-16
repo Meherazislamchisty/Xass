@@ -47,6 +47,10 @@ const userAgents = [
 const getRandomUserAgent = () => userAgents[Math.floor(Math.random() * userAgents.length)];
 
 const loadModules = (folderPath, type) => {
+  if (!fs.existsSync(folderPath)) {
+    console.error(chalk.red(`❌ Folder not found: ${folderPath}`));
+    return;
+  }
   const files = fs.readdirSync(folderPath).filter(file => file.endsWith(".js"));
   console.log(chalk.bold.redBright(`──LOADING ${type.toUpperCase()}──●`));
   files.forEach(file => {
@@ -128,9 +132,7 @@ const setupBot = (api, prefix) => {
   });
 
   setInterval(() => {
-    api.getFriendsList(() => console.log(
-      chalk.cyan("[INFO] Keep-alive signal sent")
-    ));
+    api.getFriendsList(() => console.log(chalk.cyan("[INFO] Keep-alive signal sent")));
   }, 1000 * 60 * 15);
 };
 
@@ -215,9 +217,7 @@ const init = async () => {
   await AutoLogin();
 
   console.log(chalk.bold.blueBright("──XASS BOT──"));
-  console.log(chalk.bold.red(`
- █▄░█ ▀█▀ █▀█ █▀█
- █░▀█ ░█░ █▄█ █▄█`));
+  console.log(chalk.bold.red(` █▄░█ ▀█▀ █▀█ █▀█\n █░▀█ ░█░ █▄█ █▄█`));
   console.log(chalk.bold.yellow("Credits: XASS Bot by BaYjid"));
 };
 
