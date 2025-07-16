@@ -1,7 +1,7 @@
 module.exports = {
   name: 'contact',
   description: 'Share Contact',
-  usage: '[nashPrefix]contact [id/reply/mention]',
+  usage: '[xassPrefix]contact [id/reply/mention]',
   xassPrefix: false,
   execute: async (api, event, args, prefix) => {
     const { messageReply, senderID, threadID, mentions } = event;
