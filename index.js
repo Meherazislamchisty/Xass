@@ -2,13 +2,13 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const login = require("xass-fca");
+const login = require("@xaviabot/fca-unofficial");
 const fs = require("fs");
 const autoReact = require("./handle/autoReact");
 const unsendReact = require("./handle/unsendReact");
 const chalk = require("chalk");
 const axios = require("axios");
-const mongoose = require("mongoose"); // MongoDB
+const mongoose = require("mongoose");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,7 +18,6 @@ const config = JSON.parse(fs.readFileSync(configPath, "utf8"));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-// MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -26,7 +25,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log("✅ MongoDB Connected!"))
 .catch((err) => console.error("❌ MongoDB Error:", err));
 
-// Global Objects
 global.XassBoT = {
   commands: new Map(),
   events: new Map(),
@@ -42,7 +40,12 @@ let loginAttempts = 0;
 const MAX_RETRIES = 5;
 const RETRY_INTERVAL = 5000;
 
-const userAgents = [ /* user agents list same as before */ ];
+const userAgents = [
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0",
+  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+];
+
 const getRandomUserAgent = () => userAgents[Math.floor(Math.random() * userAgents.length)];
 
 const loadModules = (type) => {
@@ -72,18 +75,19 @@ const AutoLogin = async () => {
     const appState = JSON.parse(fs.readFileSync(appStatePath, "utf8"));
     const loginOptions = { appState, userAgent: getRandomUserAgent() };
 
-    login(loginOptions, (err, api) => {
-      if (err) {
-        console.error(chalk.red("❌ Login failed. Retrying..."));
+    login(loginOptions)
+      .then(api => {
+        const cuid = api.getCurrentUserID();
+        global.XassBoT.onlineUsers.set(cuid, { userID: cuid, prefix: config.prefix });
+        setupBot(api, config.prefix);
+        isLoggedIn = true;
+        loginAttempts = 0;
+      })
+      .catch(err => {
+        console.error(chalk.red("❌ Login failed. Retrying..."), err);
         retryLogin();
-        return;
-      }
-      const cuid = api.getCurrentUserID();
-      global.XassBoT.onlineUsers.set(cuid, { userID: cuid, prefix: config.prefix });
-      setupBot(api, config.prefix);
-      isLoggedIn = true;
-      loginAttempts = 0;
-    });
+      });
+
   } else {
     console.error(chalk.red("❌ appstate.json not found."));
   }
@@ -124,9 +128,9 @@ const setupBot = (api, prefix) => {
   });
 
   setInterval(() => {
-    api.getFriendsList(() => console.log(
+    api.getFriendsList().then(() => console.log(
       chalk.cyan("[INFO] Keep-alive signal sent")
-    ));
+    )).catch(() => {});
   }, 1000 * 60 * 15);
 };
 
