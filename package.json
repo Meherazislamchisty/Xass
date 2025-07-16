@@ -1,7 +1,7 @@
 {
   "name": "xass-bot",
   "version": "1.0.0",
-  "description": "Facebook Messenger Bot powered by xass-fca",
+  "description": "Facebook Messenger Bot powered by fca-unofficial",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -33,7 +33,7 @@
     "node-schedule": "^2.1.1",
     "pastebin-api": "^7.0.0",
     "request": "^2.88.2",
-    "xass-fca": "^1.0.4",
-    "mathjs": "^14.3.1"
+    "mathjs": "^14.3.1",
+    "dotenv": "^16.4.5"
   }
 }
